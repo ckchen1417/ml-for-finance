@@ -15,6 +15,10 @@ I typically begin with raw data plots and histograms. This allows us to understa
 There are two stocks loaded for you into pandas DataFrames: lng_df and spy_df (LNG and SPY). Take a look at them with .head(). We'll use the closing prices and eventually volume as inputs to ML algorithms.
 
 Note: We'll call plt.clf() each time we want to make a new plot, or f = plt.figure().
+Print out the first 5 lines of the two DataFrame (lng_df and spy_df) and examine their contents.
+    Use the pandas library to plot raw time series data for 'SPY' and 'LNG' with the adjusted close price ('Adj_Close') -- set legend=True in .plot().
+    Use plt.show() to show the raw time series plot (matplotlib.pyplot has been imported as plt).
+    Use pandas and matplotlib to make a histogram of the adjusted close 1-day percent difference (use .pct_change()) for SPY and LNG.
 ### Markdown
 
 
@@ -29,16 +33,6 @@ First, let's explore the data. Any time we begin a machine learning (ML) project
     histograms
     and more...
 
-I typically begin with raw data plots and histograms. This allows us to understand our data's distributions. If it's a normal distribution, we can use things like parametric statistics.
-
-There are two stocks loaded for you into pandas DataFrames: lng_df and spy_df (LNG and SPY). Take a look at them with .head(). We'll use the closing prices and eventually volume as inputs to ML algorithms.
-
-Note: We'll call plt.clf() each time we want to make a new plot, or f = plt.figure().
-
-Print out the first 5 lines of the two DataFrame (lng_df and spy_df) and examine their contents.
-    Use the pandas library to plot raw time series data for 'SPY' and 'LNG' with the adjusted close price ('Adj_Close') -- set legend=True in .plot().
-    Use plt.show() to show the raw time series plot (matplotlib.pyplot has been imported as plt).
-    Use pandas and matplotlib to make a histogram of the adjusted close 1-day percent difference (use .pct_change()) for SPY and LNG.
 # Header 1
 
 ## Header 2
