@@ -43,7 +43,19 @@ Note: We'll call plt.clf() each time we want to make a new plot, or f = plt.figu
     Use the pandas library to plot raw time series data for 'SPY' and 'LNG' with the adjusted close price ('Adj_Close') -- set legend=True in .plot().
     Use plt.show() to show the raw time series plot (matplotlib.pyplot has been imported as plt).
     Use pandas and matplotlib to make a histogram of the adjusted close 1-day percent difference (use .pct_change()) for SPY and LNG.
+print(lng_df.head())  # examine the DataFrames
+print(spy_df.head())  # examine the SPY DataFrame
 
+# Plot the Adj_Close columns for SPY and LNG
+spy_df['Adj_Close'].plot(label='SPY', legend=True)
+lng_df['Adj_Close'].plot(label='LNG', legend=True, secondary_y=True)
+plt.show()  # show the plot
+plt.clf()  # clear the plot space
+
+# Histogram of the daily price change percent of Adj_Close for LNG
+lng_df['Adj_Close'].pct_change().plot.hist(bins=50)
+plt.xlabel('adjusted close 1-day percent change')
+plt.show()
 - Bulleted
 - List
 
