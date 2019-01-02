@@ -82,3 +82,29 @@ RS=average gain over n periodsaverage loss over n periods
 The n periods is set in talib.RSI() as the timeperiod argument.
 
 A common period for RSI is 14, so we'll use that as one setting in our calculations.
+
+## Instructions
+
+1.
+    Create a list of feature names (start with a list containing only '5d_close_pct').
+    Use timeperiods of 14, 30, 50, and 200 to calculate moving averages with talib.SMA() from adjusted close prices (lng_df['Adj_Close']).
+    Normalize the moving averages with the adjusted close by dividing by Adj_Close.
+    Within the loop, calculate RSI with talib.RSI() from Adj_Close and using n for the timeperiod.
+
+```markdown
+feature_names = ['5d_close_pct']  # a list of the feature names for later
+
+# Create moving averages and rsi for timeperiods of 14, 30, 50, and 200
+for n in [14,30,50,200]:
+
+    # Create the moving average indicator and divide by Adj_Close
+    lng_df['ma' + str(n)] = talib.SMA(lng_df['Adj_Close'].values,
+                              timeperiod=n) / lng_df['Adj_Close']
+    # Create the RSI indicator
+    lng_df['rsi' + str(n)] = talib.RSI(lng_df['Adj_Close'].values, timeperiod=n)
+    
+    # Add rsi and moving average to the feature name list
+    feature_names = feature_names + ['ma' + str(n), 'rsi' + str(n)]
+
+print(feature_names)
+```
