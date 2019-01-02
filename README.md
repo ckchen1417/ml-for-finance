@@ -26,20 +26,6 @@ Markdown is a lightweight and easy-to-use syntax for styling your writing. It in
 
 ```markdown
 Syntax highlighted code block
-Explore the data with some EDA
-First, let's explore the data. Any time we begin a machine learning (ML) project, we need to first do some exploratory data analysis (EDA) to familiarize ourselves with the data. This includes things like:
-
-    raw data plots
-    histograms
-    and more...
-
-# Header 1
-
-## Header 2
-
-### Header 3
-
-    
 print(lng_df.head())  # examine the DataFrames
 print(spy_df.head())  # examine the SPY DataFrame
 
@@ -52,6 +38,15 @@ plt.clf()  # clear the plot space
 # Histogram of the daily price change percent of Adj_Close for LNG
 lng_df['Adj_Close'].pct_change().plot.hist(bins=50)
 plt.xlabel('adjusted close 1-day percent change')
+
+# Header 1
+
+## Header 2
+
+### Header 3
+
+    
+
 plt.show()
 - Bulleted
 - List
