@@ -1,4 +1,4 @@
-## Welcome to Machine Learning for Finance in Python
+# Welcome to Machine Learning for Finance in Python
 
 First, let's explore the data. Any time we begin a machine learning (ML) project, we need to first do some exploratory data analysis (EDA) to familiarize ourselves with the data. This includes things like:
 
@@ -67,7 +67,7 @@ plt.scatter(lng_df['5d_close_pct'], lng_df['5d_close_future_pct'])
 plt.show()
 ```
 
-## Create moving average and RSI features
+# Create moving average and RSI features
 
 We want to add historical data to our machine learning models to make better predictions, but adding lots of historical time steps is tricky. Instead, we can condense information from previous points into a single timestep with indicators.
 
@@ -138,7 +138,7 @@ feat_targ_df = lng_df[['5d_close_future_pct'] + feature_names]
 corr = feat_targ_df.corr()
 print(corr)
 ```
-## Check the correlations
+# Check the correlations
 
 Before we fit our first machine learning model, let's look at the correlations between features and targets. Ideally we want large (near 1 or -1) correlations between features and targets. Examining correlations can help us tweak features to maximize correlation (for example, altering the timeperiod argument in the talib functions). It can also help us remove features that aren't correlated to the target.
 
@@ -169,7 +169,7 @@ plt.scatter(lng_df['ma200'],lng_df['5d_close_future_pct'])
 plt.show()
 ```
 
-## Create train and test features
+# Create train and test features
 
 Before we fit our linear model, we want to add a constant to our features, so we have an intercept for our linear model.
 
@@ -177,7 +177,7 @@ We also want to create train and test features. This is so we can fit our model 
 
 With a time series like this, we typically want to use the oldest data as our training set, and the newest data as our test set. This is so we can evaluate the performance of the model on the most recent data, which will more realistically simulate predictions on data we haven't seen yet.
 
-# Create train instructions
+## Create train instructions
 
 
 1.    Import the statsmodels.api library with the alias sm.
@@ -203,7 +203,7 @@ test_targets = targets[train_size:]
 print(linear_features.shape, train_features.shape, test_features.shape)
 ```
 
-## Fit a linear model
+# Fit a linear model
 
 We'll now fit a linear model, because they are simple and easy to understand. Once we've fit our model, we can see which predictor variables appear to be meaningfully linearly correlated with the target, as well as their magnitude of effect on the target. Our judgment of whether or not predictors are significant is based on the p-values of coefficients. This is using a t-test to statistically test if the coefficient significantly differs from 0. The p-value is the percent chance that the coefficient for a feature does not differ from zero. Typically, we take a p-value of less than 0.05 to mean the coefficient is significantly different from 0.
 
@@ -230,7 +230,7 @@ train_predictions = results.predict(train_features)
 test_predictions = results.predict(test_features)
 ```
 
-## Evaluate our results
+# Evaluate our results
 
 Once we have our linear fit and predictions, we want to see how good the predictions are so we can decide if our model is any good or not. Ideally, we want to back-test any type of trading strategy. However, this is a complex and typically time-consuming experience.
 
