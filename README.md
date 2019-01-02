@@ -28,6 +28,11 @@ There are two stocks loaded for you into pandas DataFrames: lng_df and spy_df (L
 Note: We'll call plt.clf() each time we want to make a new plot, or f = plt.figure().
 ### Header 3
 
+    Print out the first 5 lines of the two DataFrame (lng_df and spy_df) and examine their contents.
+    Use the pandas library to plot raw time series data for 'SPY' and 'LNG' with the adjusted close price ('Adj_Close') -- set legend=True in .plot().
+    Use plt.show() to show the raw time series plot (matplotlib.pyplot has been imported as plt).
+    Use pandas and matplotlib to make a histogram of the adjusted close 1-day percent difference (use .pct_change()) for SPY and LNG.
+
 - Bulleted
 - List
 
