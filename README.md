@@ -66,3 +66,19 @@ print(corr)
 plt.scatter(lng_df['5d_close_pct'], lng_df['5d_close_future_pct'])
 plt.show()
 ```
+
+## Create moving average and RSI features
+
+We want to add historical data to our machine learning models to make better predictions, but adding lots of historical time steps is tricky. Instead, we can condense information from previous points into a single timestep with indicators.
+
+A moving average is one of the simplest indicators - it's the average of previous data points. This is the function talib.SMA() from the TAlib library.
+
+Another common technical indicator is the relative strength index (RSI). This is defined by:
+
+RSI=100−100/(1+RS)
+
+RS=average gain over n periodsaverage loss over n periods
+
+The n periods is set in talib.RSI() as the timeperiod argument.
+
+A common period for RSI is 14, so we'll use that as one setting in our calculations.
