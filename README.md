@@ -41,9 +41,14 @@ Correlations are nice to check out before building machine learning models, beca
 If we use the same time periods for previous price changes and future price changes, we can see if the stock price is mean-reverting (bounces around) or trend-following (goes up if it has been going up recently).
 
 ## Instructions
-Using the lng_df DataFrame and its Adj_Close:
 
-    Create the 5-day future price (as 5d_future_close) with pandas' .shift().
-    Use pct_change() on 5d_future_close and Adj_Close to create the % price change 5 days in the future (5d_close_future_pct), and the current 5-day % price change (5d_close_pct).
-    Examine correlations between the two 5-day percent price change columns with .corr() on lng_df.
-    Using plt.scatter(), make a scatterplot of 5d_close_pct vs 5d_close_future_pct.
+~~~Using the lng_df DataFrame and its Adj_Close:
+
+1. Create the 5-day future price (as 5d_future_close) with pandas' .shift().
+2. Use pct_change() on 5d_future_close and Adj_Close to create the % price
+change 5 days in the future (5d_close_future_pct), and the current -5-day % 
+price change (5d_close_pct).
+3. Examine correlations between the two 5-day percent price change columns 
+with .corr() on lng_df.
+4. Using plt.scatter(), make a scatterplot of 5d_close_pct vs 5d_close_future_pct.
+~~~
