@@ -1,9 +1,5 @@
 ## Welcome to Machine Learning for Finance in Python
 
-You can use the [editor on GitHub](https://github.com/ckchen1417/ml-for-finance/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
 First, let's explore the data. Any time we begin a machine learning (ML) project, we need to first do some exploratory data analysis (EDA) to familiarize ourselves with the data. This includes things like:
 
     raw data plots
@@ -19,13 +15,7 @@ Print out the first 5 lines of the two DataFrame (lng_df and spy_df) and examine
     Use the pandas library to plot raw time series data for 'SPY' and 'LNG' with the adjusted close price ('Adj_Close') -- set legend=True in .plot().
     Use plt.show() to show the raw time series plot (matplotlib.pyplot has been imported as plt).
     Use pandas and matplotlib to make a histogram of the adjusted close 1-day percent difference (use .pct_change()) for SPY and LNG.
-### Markdown
 
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
 print(lng_df.head())  # examine the DataFrames
 print(spy_df.head())  # examine the SPY DataFrame
 
@@ -38,27 +28,7 @@ plt.clf()  # clear the plot space
 # Histogram of the daily price change percent of Adj_Close for LNG
 lng_df['Adj_Close'].pct_change().plot.hist(bins=50)
 plt.xlabel('adjusted close 1-day percent change')
-
-# Header 1
-
-## Header 2
-
-### Header 3
-
-    
-
 plt.show()
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ### Jekyll Themes
