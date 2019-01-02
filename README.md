@@ -4,6 +4,17 @@ You can use the [editor on GitHub](https://github.com/ckchen1417/ml-for-finance/
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
+First, let's explore the data. Any time we begin a machine learning (ML) project, we need to first do some exploratory data analysis (EDA) to familiarize ourselves with the data. This includes things like:
+
+    raw data plots
+    histograms
+    and more...
+
+I typically begin with raw data plots and histograms. This allows us to understand our data's distributions. If it's a normal distribution, we can use things like parametric statistics.
+
+There are two stocks loaded for you into pandas DataFrames: lng_df and spy_df (LNG and SPY). Take a look at them with .head(). We'll use the closing prices and eventually volume as inputs to ML algorithms.
+
+Note: We'll call plt.clf() each time we want to make a new plot, or f = plt.figure().
 ### Markdown
 
 
