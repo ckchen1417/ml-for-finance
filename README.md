@@ -12,7 +12,7 @@ There are two stocks loaded for you into pandas DataFrames: lng_df and spy_df (L
 
 Note: We'll call plt.clf() each time we want to make a new plot, or f = plt.figure().
 
-## Instructions
+## Explore Instructions
 Print out the first 5 lines of the two DataFrame (lng_df and spy_df) and examine their contents.
     Use the pandas library to plot raw time series data for 'SPY' and 'LNG' with the adjusted close price ('Adj_Close') -- set legend=True in .plot().
     Use plt.show() to show the raw time series plot (matplotlib.pyplot has been imported as plt).
@@ -40,7 +40,7 @@ Correlations are nice to check out before building machine learning models, beca
 
 If we use the same time periods for previous price changes and future price changes, we can see if the stock price is mean-reverting (bounces around) or trend-following (goes up if it has been going up recently).
 
-## Instructions
+## Correlations Instructions
 
 Using the lng_df DataFrame and its Adj_Close:
 
@@ -83,7 +83,7 @@ The n periods is set in talib.RSI() as the timeperiod argument.
 
 A common period for RSI is 14, so we'll use that as one setting in our calculations.
 
-## Instructions
+## Create MA Instructions
 
 1.Create a list of feature names (start with a list containing only '5d_close_pct').
 2.Use timeperiods of 14, 30, 50, and 200 to calculate moving averages with talib.SMA()
@@ -114,7 +114,7 @@ We almost have features and targets that are machine-learning ready -- we have f
 
 Our indicators also cause us to have missing values at the beginning of the DataFrame due to the calculations. We could backfill this data, fill it with a single value, or drop the rows. Dropping the rows is a good choice, so our machine learning algorithms aren't confused by any sort of backfilled or 0-filled data. Pandas has a .dropna() function which we will use to drop any rows with missing values.
 
-## Instructions
+## Create features Instructions
 
 1.    Drop the missing values from lng_df with .dropna() from pandas.
 2.    Create a variable containing features using feature_names and our lng_df DataFrame.
@@ -144,7 +144,7 @@ Before we fit our first machine learning model, let's look at the correlations b
 
 To easily plot a correlation matrix, we can use seaborn's heatmap() function. This takes a correlation matrix as the first argument, and has many other options. Check out the annot option -- this will help us turn on annotations.
 
-## Instructions
+## Check correctlations Instructions
 
 
 1.    Plot a heatmap of the correlation matrix (corr) we calculated in the last
@@ -169,4 +169,92 @@ plt.scatter(lng_df['ma200'],lng_df['5d_close_future_pct'])
 plt.show()
 ```
 
+## Create train and test features
 
+Before we fit our linear model, we want to add a constant to our features, so we have an intercept for our linear model.
+
+We also want to create train and test features. This is so we can fit our model to the train dataset, and evaluate performance on the test dataset. We always want to check performance on data the model has not seen to make sure we're not overfitting, which is memorizing patterns in the training data too exactly.
+
+With a time series like this, we typically want to use the oldest data as our training set, and the newest data as our test set. This is so we can evaluate the performance of the model on the most recent data, which will more realistically simulate predictions on data we haven't seen yet.
+
+# Create train instructions
+
+
+1.    Import the statsmodels.api library with the alias sm.
+2.    Add a constant to the features variable using statsmodels' .add_constant() function.
+3.    Set train_size as 85% of the total number of datapoints (number of rows) using the .shape[0] property of features or targets.
+4.    Break up linear_features and targets into train and test sets using train_size and Python indexing (e.g. [start:stop]).
+
+
+
+```markdown
+# Import the statsmodels.api library with the alias sm
+import statsmodels.api as sm
+
+# Add a constant to the features
+linear_features = sm.add_constant(features)
+
+# Create a size for the training set that is 85% of the total number of samples
+train_size = int(0.85 * features.shape[0])
+train_features = linear_features[0:train_size]
+train_targets = targets[0:train_size]
+test_features = linear_features[train_size:]
+test_targets = targets[train_size:]
+print(linear_features.shape, train_features.shape, test_features.shape)
+```
+
+## Fit a linear model
+
+We'll now fit a linear model, because they are simple and easy to understand. Once we've fit our model, we can see which predictor variables appear to be meaningfully linearly correlated with the target, as well as their magnitude of effect on the target. Our judgment of whether or not predictors are significant is based on the p-values of coefficients. This is using a t-test to statistically test if the coefficient significantly differs from 0. The p-value is the percent chance that the coefficient for a feature does not differ from zero. Typically, we take a p-value of less than 0.05 to mean the coefficient is significantly different from 0.
+
+## Fit linear model instructions
+
+1.    Fit the linear model (using the .fit() method) and save the results in the results variable.
+2.    Print out the results summary with the .summary() function.
+3.    Print out the p-values from the results (the .pvalues property of results).
+4.    Make predictions from the train_features and test_features using the .predict() function of our results object.
+
+
+```markdown
+# Create the linear model and complete the least squares fit
+model = sm.OLS(train_targets, train_features)
+results = model.fit()  # fit the model
+print(results.summary())
+
+# examine pvalues
+# Features with p <= 0.05 are typically considered significantly different from 0
+print(results.pvalues)
+
+# Make predictions from our model for train and test sets
+train_predictions = results.predict(train_features)
+test_predictions = results.predict(test_features)
+```
+
+## Evaluate our results
+
+Once we have our linear fit and predictions, we want to see how good the predictions are so we can decide if our model is any good or not. Ideally, we want to back-test any type of trading strategy. However, this is a complex and typically time-consuming experience.
+
+A quicker way to understand the performance of our model is looking at regression evaluation metrics like R2
+, and plotting the predictions versus the actual values of the targets. Perfect predictions would form a straight, diagonal line in such a plot, making it easy for us to eyeball how our predictions are doing in different regions of price changes. We can use matplotlib's .scatter() function to create scatter plots of the predictions and actual values.
+
+## Evaluate instructions
+
+1.    Show test_predictions vs test_targets in a scatterplot, with 80% transparency for the points (use the alpha parameter to set transparency).
+2.    Plot the perfect prediction line using np.arange() and the minimum and maximum values from the xaxis (xmin, xmax).
+3.    Display the legend on the plot with plt.legend().
+
+```
+# Scatter the predictions vs the targets with 80% transparency
+plt.scatter(train_predictions, train_targets, alpha=0.2, color='b', label='train')
+plt.scatter(test_predictions, test_targets, alpha=0.2, color='r', label='test')
+
+# Plot the perfect prediction line
+xmin, xmax = plt.xlim()
+plt.plot(np.arange(xmin, xmax, 0.01), np.arange(xmin, xmax, 0.01), c='k')
+
+# Set the axis labels and show the plot
+plt.xlabel('predictions')
+plt.ylabel('actual')
+plt.legend()  # show the legend
+plt.show()
+```
