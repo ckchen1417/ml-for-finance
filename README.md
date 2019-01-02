@@ -32,6 +32,8 @@ plt.clf()  # clear the plot space
 lng_df['Adj_Close'].pct_change().plot.hist(bins=50)
 plt.xlabel('adjusted close 1-day percent change')
 plt.show()
+```
+
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ### Jekyll Themes
