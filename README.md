@@ -14,10 +14,10 @@ Note: We'll call plt.clf() each time we want to make a new plot, or f = plt.figu
 
 Instructions
 
-Print out the first 5 lines of the two DataFrame (lng_df and spy_df) and examine their contents.
-    Use the pandas library to plot raw time series data for 'SPY' and 'LNG' with the adjusted close price ('Adj_Close') -- set legend=True in .plot().
-    Use plt.show() to show the raw time series plot (matplotlib.pyplot has been imported as plt).
-    Use pandas and matplotlib to make a histogram of the adjusted close 1-day percent difference (use .pct_change()) for SPY and LNG.
+1. Print out the first 5 lines of the two DataFrame (lng_df and spy_df) and examine their contents.
+2. Use the pandas library to plot raw time series data for 'SPY' and 'LNG' with the adjusted close price ('Adj_Close') -- set legend=True in .plot().
+3. Use plt.show() to show the raw time series plot (matplotlib.pyplot has been imported as plt).
+4. Use pandas and matplotlib to make a histogram of the adjusted close 1-day percent difference (use .pct_change()) for SPY and LNG.
 ```markdown
 
 print(lng_df.head())  # examine the DataFrames
@@ -86,11 +86,11 @@ A common period for RSI is 14, so we'll use that as one setting in our calculati
 
 Create MA Instructions
 
-1.Create a list of feature names (start with a list containing only '5d_close_pct').
-2.Use timeperiods of 14, 30, 50, and 200 to calculate moving averages with talib.SMA()
+1. Create a list of feature names (start with a list containing only '5d_close_pct').
+2. Use timeperiods of 14, 30, 50, and 200 to calculate moving averages with talib.SMA()
 from adjusted close prices (lng_df['Adj_Close']).
-3.Normalize the moving averages with the adjusted close by dividing by Adj_Close.
-4.Within the loop, calculate RSI with talib.RSI() from Adj_Close and using n for the timeperiod.
+3. Normalize the moving averages with the adjusted close by dividing by Adj_Close.
+4. Within the loop, calculate RSI with talib.RSI() from Adj_Close and using n for the timeperiod.
 
 ```markdown
 feature_names = ['5d_close_pct']  # a list of the feature names for later
